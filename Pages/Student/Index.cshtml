@@ -1,0 +1,58 @@
+@page "{searchString?}"
+@using Pages.Student
+@model IndexModel
+
+<h1>Students list</h1>
+<form method="post">
+    <input type="text" name="GPA"/>
+    <input type="submit" value="Greater" asp-page-handler="Greater" />
+    <input type="submit" value="Less" asp-page-handler="Less" />
+</form>
+
+<form>
+    <input type="text" name="SearchString" />
+    <input type="submit" value="Search" asp-page-handler="Search" />
+</form>
+
+
+
+<button>
+    <a asp-page="./Create" asp-route-id="Model.Students.Id">Create</a>
+</button>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Students[0].FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Students[0].LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Students[0].GPA)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Students) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GPA)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
